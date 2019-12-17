@@ -1,0 +1,1 @@
+This stack creates a Windows Instance with Cloud GPU enabled.

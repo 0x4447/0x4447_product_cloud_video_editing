@@ -1,0 +1,38 @@
+{
+    "AWS::CloudFormation::Interface" : {
+            "ParameterGroups": [
+                {
+                    "Label": {
+                        "default": "Network configuration"
+                    },
+                    "Parameters": [
+                        "VPCID",
+                        "PublicSubnet1ID",
+                        "PublicSubnet2ID"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Amazon EC2 configuration"
+                    },
+                    "Parameters": [
+                        "KeyPairName"
+                    ]
+                }
+            ],
+            "ParameterLabels": {
+                "KeyPairName": {
+                    "default": "Key pair name"
+                },
+                "PublicSubnet1ID": {
+                    "default": "Public subnet A ID"
+                },
+                "PublicSubnet2ID": {
+                    "default": "Public subnet B ID"
+                },
+                "VPCID": {
+                    "default": "VPC ID"
+                }
+            }
+        }
+}

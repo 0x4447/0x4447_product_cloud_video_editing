@@ -1,0 +1,6 @@
+{
+    "PublicSubnet2ID": {
+        "Description": "ID of the public subnet 2 in Availability Zone 2 (e.g., subnet-e3246d8e)",
+        "Type": "AWS::EC2::Subnet::Id"
+    }
+}

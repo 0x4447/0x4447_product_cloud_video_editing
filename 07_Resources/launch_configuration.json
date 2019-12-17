@@ -1,0 +1,90 @@
+{
+    "VideoEditingLaunchConfiguration": {
+        "Type": "AWS::AutoScaling::LaunchConfiguration",
+        "Properties": {
+            "KeyName": { "Ref": "KeyPairName" },
+            "ImageId": { "Fn::FindInMap": [ "AWSAMIRegionMap", { "Ref": "AWS::Region" }, "WS2016FULLG3"] },
+            "InstanceType": "t3.large",
+            "SecurityGroups": [ { "Ref": "EditHostSecurityGroup" } ],
+            "BlockDeviceMappings": [
+                {
+                    "DeviceName": "/dev/sda1",
+                    "Ebs": {
+                        "VolumeSize": 100,
+                        "VolumeType": "gp2"
+                    }
+                }
+            ],
+            "UserData": {
+                "Fn::Base64": {
+                    "Fn::Join": [
+                        "",
+                        [
+                            "<script>\n",
+
+                            "cfn-init.exe -v -c config -s ",
+                            { "Ref": "AWS::StackId" },
+                            " -r VideoEditingLaunchConfiguration",
+                            " --region ",
+                            { "Ref": "AWS::Region" },
+
+                            "\n",
+
+                            "cfn-signal.exe -e %ERRORLEVEL% --stack ",
+                            { "Ref": "AWS::StackId" },
+                            " --resource VideoEditingAutoScalingGroup --region ",
+                            { "Ref": "AWS::Region" },
+
+                            "\n",
+
+                            "</script>"
+                        ]
+                    ]
+                }
+            }
+        },
+        "Metadata": {
+            "AWS::CloudFormation::Init": {
+                "configSets": {
+                    "config": [
+                        "setup",
+                        "packages"
+                    ]
+                },
+                "setup": {
+                    "services": {
+                        "windows": {
+                            "Audiosrv": {
+                                "ensureRunning": "true",
+                                "enabled": "true"
+                            }
+                        }
+                    }
+                },
+                "packages": {
+                    "files": {
+                        "C:\\cfn\\scripts\\chocolatey.ps1": {
+                            "source": {
+                                "Fn::Sub": "https://chocolatey.org/install.ps1"
+                            }
+                        }
+                    },
+                    "commands": {
+                        "01-install-chocolatey": {
+                            "command": "powershell.exe -ExecutionPolicy Unrestricted C:\\cfn\\scripts\\chocolatey.ps1",
+                            "waitAfterCompletion": "30"
+                        },
+                        "02-install-chrome": {
+                            "command": "C:\\ProgramData\\chocolatey\\bin\\choco.exe install --limit-output -y googlechrome",
+                            "waitAfterCompletion": "30"
+                        },
+                        "03-install-cyberduck": {
+                            "command": "C:\\ProgramData\\chocolatey\\bin\\choco.exe install --limit-output -y cyberduck",
+                            "waitAfterCompletion": "30"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

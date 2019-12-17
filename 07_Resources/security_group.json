@@ -1,0 +1,25 @@
+{
+    "EditHostSecurityGroup": {
+        "Type": "AWS::EC2::SecurityGroup",
+        "Properties": {
+            "GroupDescription": "RDP",
+            "SecurityGroupIngress": [
+                {
+                    "IpProtocol": "udp",
+                    "FromPort": "3389",
+                    "ToPort": "3389",
+                    "CidrIp": "0.0.0.0/0"
+                },
+                {
+                    "IpProtocol": "tcp",
+                    "FromPort": "3389",
+                    "ToPort": "3389",
+                    "CidrIp": "0.0.0.0/0"
+                }
+            ],
+            "VpcId": {
+                "Ref": "VPCID"
+            }
+        }
+    }
+}
