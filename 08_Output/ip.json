@@ -1,0 +1,6 @@
+{
+    "IPOutput": {
+        "Value": { "Fn::GetAtt": [ "EC2Instance", "PublicIp" ] },
+        "Description": "THe final bucket name."
+    }
+}

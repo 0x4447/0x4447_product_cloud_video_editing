@@ -1,0 +1,10 @@
+{
+    "VolumeAttachmentData": {
+        "Type" : "AWS::EC2::VolumeAttachment",
+        "Properties" : {
+            "Device" : "/dev/sda2",
+            "InstanceId" : { "Ref": "EC2Instance" },
+            "VolumeId" : { "Ref": "VolumeData" }
+        }
+    }
+}

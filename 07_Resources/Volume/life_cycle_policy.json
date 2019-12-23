@@ -1,0 +1,45 @@
+{
+    "VolumeLifecyclePolicy": {
+        "Type": "AWS::DLM::LifecyclePolicy",
+        "Properties": {
+            "Description": "Daily Backups for the Video Editing rig",
+            "State": "ENABLED",
+            "ExecutionRoleArn": {"Fn::GetAtt" : ["VolumeRole", "Arn"] },
+            "PolicyDetails": {
+                "ResourceTypes": [ "VOLUME" ],
+                "TargetTags": [
+                    {
+                        "Key": "Name",
+                        "Value": "video-editing-data"
+                    },
+                    {
+                        "Key": "Name",
+                        "Value": "video-editing-os"
+                    }
+                ],
+                "Schedules":[
+                    {
+                        "Name": "DailySnapshots",
+                        "TagsToAdd": [
+                            {
+                                "Key": "Type",
+                                "Value": "daily-snapshot"
+                            }
+                        ],
+                        "CreateRule": {
+                            "Interval": 24,
+                            "IntervalUnit": "HOURS",
+                            "Times": [
+                                "08:00"
+                            ]
+                        },
+                        "RetainRule": {
+                            "Count": 7
+                        },
+                        "CopyTags": true
+                    }
+                ]
+            }
+        }
+    }
+}

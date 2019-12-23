@@ -7,8 +7,16 @@
                     },
                     "Parameters": [
                         "VPCID",
-                        "PublicSubnet1ID",
-                        "PublicSubnet2ID"
+                        "VPCSubnetParam"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Drives Restoration"
+                    },
+                    "Parameters": [
+                        "SnapshotIdDataParam",
+                        "SnapshotIdOSParam"
                     ]
                 },
                 {
@@ -21,18 +29,11 @@
                 }
             ],
             "ParameterLabels": {
-                "KeyPairName": {
-                    "default": "Key pair name"
-                },
-                "PublicSubnet1ID": {
-                    "default": "Public subnet A ID"
-                },
-                "PublicSubnet2ID": {
-                    "default": "Public subnet B ID"
-                },
-                "VPCID": {
-                    "default": "VPC ID"
-                }
+                "KeyPairName": {"default": "Key pair name"},
+                "VPCSubnetParam": {"default": "Default Subnet"},
+                "VPCID": {"default": "VPC ID"},
+                "SnapshotIdOSParam": {"default": "OS Snapshot ID"},
+                "SnapshotIdDataParam": {"default": "Data Snapshot ID"}
             }
         }
 }

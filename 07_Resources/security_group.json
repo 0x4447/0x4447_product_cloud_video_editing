@@ -1,5 +1,5 @@
 {
-    "EditHostSecurityGroup": {
+    "EC2SecurityGroup": {
         "Type": "AWS::EC2::SecurityGroup",
         "Properties": {
             "GroupDescription": "RDP",
@@ -19,7 +19,13 @@
             ],
             "VpcId": {
                 "Ref": "VPCID"
-            }
+            },
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "video-editing"
+                }
+            ]
         }
     }
 }

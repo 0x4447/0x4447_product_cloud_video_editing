@@ -1,0 +1,6 @@
+{
+    "SnapshotIdDataParam": {
+        "Description": "The Snapshot ID for the Data drive where all the video files are.",
+        "Type": "String"
+    }
+}

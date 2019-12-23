@@ -1,11 +1,11 @@
 {
-    "VideoEditingLaunchConfiguration": {
-        "Type": "AWS::AutoScaling::LaunchConfiguration",
+    "EC2Instance": {
+        "Type": "AWS::EC2::Instance",
         "Properties": {
-            "KeyName": { "Ref": "KeyPairName" },
+            "InstanceType": "g3.4xlarge",
             "ImageId": { "Fn::FindInMap": [ "AWSAMIRegionMap", { "Ref": "AWS::Region" }, "WS2016FULLG3"] },
-            "InstanceType": "t3.large",
-            "SecurityGroups": [ { "Ref": "EditHostSecurityGroup" } ],
+            "KeyName": { "Ref": "KeyPairName" },
+            "IamInstanceProfile": { "Ref": "ECSInstanceProfile" },
             "BlockDeviceMappings": [
                 {
                     "DeviceName": "/dev/sda1",
@@ -20,11 +20,17 @@
                     "Fn::Join": [
                         "",
                         [
-                            "<script>\n",
+                            "<script>",
+
+                            "\n",
+
+                            "Initialize-Disk -Number 1 -PartitionStyle 'MBR'",
+
+                            "\n",
 
                             "cfn-init.exe -v -c config -s ",
                             { "Ref": "AWS::StackId" },
-                            " -r VideoEditingLaunchConfiguration",
+                            " -r EC2Instance",
                             " --region ",
                             { "Ref": "AWS::Region" },
 
@@ -32,7 +38,7 @@
 
                             "cfn-signal.exe -e %ERRORLEVEL% --stack ",
                             { "Ref": "AWS::StackId" },
-                            " --resource VideoEditingAutoScalingGroup --region ",
+                            " --resource EC2Instance --region ",
                             { "Ref": "AWS::Region" },
 
                             "\n",
@@ -41,13 +47,30 @@
                         ]
                     ]
                 }
-            }
+            },
+            "NetworkInterfaces": [ {
+                "AssociatePublicIpAddress": "true",
+                "DeviceIndex": "0",
+                "GroupSet": [{ "Ref": "EC2SecurityGroup" }],
+                "SubnetId": { "Ref": "VPCSubnetParam" }
+            }],
+            "Tags": [
+                {
+                    "Key": "Name",
+                    "Value": "video-editing"
+                },
+                {
+                    "Key": "Description",
+                    "Value": "An instance to do Video Editing in the Cloud."
+                }
+            ]
         },
         "Metadata": {
             "AWS::CloudFormation::Init": {
                 "configSets": {
                     "config": [
                         "setup",
+                        "package_manager",
                         "packages"
                     ]
                 },
@@ -61,7 +84,7 @@
                         }
                     }
                 },
-                "packages": {
+                "package_manager": {
                     "files": {
                         "C:\\cfn\\scripts\\chocolatey.ps1": {
                             "source": {
@@ -71,16 +94,17 @@
                     },
                     "commands": {
                         "01-install-chocolatey": {
-                            "command": "powershell.exe -ExecutionPolicy Unrestricted C:\\cfn\\scripts\\chocolatey.ps1",
-                            "waitAfterCompletion": "30"
+                            "command": "powershell.exe -ExecutionPolicy Unrestricted C:\\cfn\\scripts\\chocolatey.ps1"
+                        }
+                    }
+                },
+                "packages": {
+                    "commands": {
+                        "01-install-chrome": {
+                            "command": "C:\\ProgramData\\chocolatey\\bin\\choco.exe install --limit-output --no-progress -y googlechrome"
                         },
-                        "02-install-chrome": {
-                            "command": "C:\\ProgramData\\chocolatey\\bin\\choco.exe install --limit-output -y googlechrome",
-                            "waitAfterCompletion": "30"
-                        },
-                        "03-install-cyberduck": {
-                            "command": "C:\\ProgramData\\chocolatey\\bin\\choco.exe install --limit-output -y cyberduck",
-                            "waitAfterCompletion": "30"
+                        "02-install-awscli": {
+                            "command": "C:\\ProgramData\\chocolatey\\bin\\choco.exe install --limit-output --no-progress -y awscli"
                         }
                     }
                 }

@@ -1,5 +1,5 @@
 {
-    "PublicSubnet1ID": {
+    "VPCSubnetParam": {
         "Description": "ID of the public subnet 1 in Availability Zone 1 (e.g., subnet-e3246d8e)",
         "Type": "AWS::EC2::Subnet::Id"
     }
