@@ -71,7 +71,9 @@
                     "config": [
                         "setup",
                         "package_manager",
-                        "packages"
+                        "packages",
+                        "drivers",
+                        "performance"
                     ]
                 },
                 "setup": {
@@ -105,6 +107,30 @@
                         },
                         "02-install-awscli": {
                             "command": "C:\\ProgramData\\chocolatey\\bin\\choco.exe install --limit-output --no-progress -y awscli"
+                        }
+                    }
+                },
+                "drivers": {
+                    "files": {
+                        "C:\\cfn\\scripts\\drivers.ps1": {
+                            "content" : { "Fn::Join" : ["\n", [
+                                "$Bucket = \"ec2-windows-nvidia-drivers\"\r\n$KeyPrefix = \"latest\"\r\n$LocalPath = \"C:\\Users\\Administrator\\Desktop\\NVIDIA\"\r\n$Objects = Get-S3Object -BucketName $Bucket -KeyPrefix $KeyPrefix -Region us-east-1\r\nforeach ($Object in $Objects) {\r\n    $LocalFileName = $Object.Key\r\n    if ($LocalFileName -ne '' -and $Object.Size -ne 0) {\r\n        $LocalFilePath = Join-Path $LocalPath $LocalFileName\r\n        Copy-S3Object -BucketName $Bucket -Key $Object.Key -LocalFile $LocalFilePath -Region us-east-1\r\n    }\r\n}"
+                            ]]}
+                        }
+                    },
+                    "commands": {
+                        "01-download-drivers": {
+                            "command": "powershell.exe -ExecutionPolicy Unrestricted C:\\cfn\\scripts\\drivers.ps1"
+                        }
+                    }
+                },
+                "performance": {
+                    "commands": {
+                        "01-nvidia-disable-boost": {
+                            "command": "powershell.exe -ExecutionPolicy Unrestricted 'C:\\Program Files\\NVIDIA Corporation\\NVSMI\\nvidia-smi --auto-boost-default=0'"
+                        },
+                        "02-nvidia-max-clock-speed": {
+                            "command": "powershell.exe -ExecutionPolicy Unrestricted 'C:\\Program Files\\NVIDIA Corporation\\NVSMI\\nvidia-smi -ac \"2505,1177\"'"
                         }
                     }
                 }
