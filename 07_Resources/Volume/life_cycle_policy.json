@@ -19,11 +19,11 @@
                 ],
                 "Schedules":[
                     {
-                        "Name": "DailySnapshots",
+                        "Name": { "Ref": "AWS::StackName"},
                         "TagsToAdd": [
                             {
                                 "Key": "Type",
-                                "Value": "daily-snapshot"
+                                "Value": { "Ref": "AWS::StackName"}
                             }
                         ],
                         "CreateRule": {
