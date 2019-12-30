@@ -3,7 +3,8 @@
         "Type": "AWS::EC2::Instance",
         "Properties": {
             "InstanceType": "g3.4xlarge",
-            "ImageId": { "Fn::FindInMap": [ "AWSAMIRegionMap", { "Ref": "AWS::Region" }, "WS2016FULLG3"] },
+            "InstanceType": "g4dn.xlarge",
+            "ImageId": { "Fn::FindInMap": [ "AWSAMIRegionMap", { "Ref": "AWS::Region" }, "GPU"] },
             "KeyName": { "Ref": "KeyPairName" },
             "IamInstanceProfile": { "Ref": "ECSInstanceProfile" },
             "BlockDeviceMappings": [
@@ -67,9 +68,7 @@
                     "config": [
                         "setup",
                         "package_manager",
-                        "packages",
-                        "drivers",
-                        "performance"
+                        "packages"
                     ]
                 },
                 "setup": {

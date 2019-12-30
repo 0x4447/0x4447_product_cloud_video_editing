@@ -1,14 +1,14 @@
 {
     "AWSAMIRegionMap": {
-        "AMI":              {"WS2016FULLG3": "Windows_Server-2016-English-Full-G3-2019.06.12-42c739bf-b97a-49e3-b349-4f02b42272cf-ami-005ec1bafb7e5fa00.4"},
-        "ap-northeast-1":   {"WS2016FULLG3": "ami-0453072343832e5e2"},
-        "ap-southeast-1":   {"WS2016FULLG3": "ami-024114037bf3f10ee"},
-        "ap-southeast-2":   {"WS2016FULLG3": "ami-08e781dd452775cfe"},
-        "eu-central-1":     {"WS2016FULLG3": "ami-0de566448917f5020"},
-        "eu-west-1":        {"WS2016FULLG3": "ami-04d870c3e6df1f1c0"},
-        "us-east-1":        {"WS2016FULLG3": "ami-08714060ad1e9914a"},
-        "us-east-2":        {"WS2016FULLG3": "ami-0b8095375f23cb259"},
-        "us-west-1":        {"WS2016FULLG3": "ami-0abc242ba705befbd"},
-        "us-west-2":        {"WS2016FULLG3": "ami-0ae09a1dbc02427a8"}
+        "AMI":              {"GPU": "Windows_Server-2016-English-Full-G3-2019.06.12-42c739bf-b97a-49e3-b349-4f02b42272cf-ami-005ec1bafb7e5fa00.4"},
+        "ap-northeast-1":   {"GPU": "ami-0453072343832e5e2"},
+        "ap-southeast-1":   {"GPU": "ami-024114037bf3f10ee"},
+        "ap-southeast-2":   {"GPU": "ami-08e781dd452775cfe"},
+        "eu-central-1":     {"GPU": "ami-0de566448917f5020"},
+        "eu-west-1":        {"GPU": "ami-04d870c3e6df1f1c0"},
+        "us-east-1":        {"GPU": "ami-08714060ad1e9914a"},
+        "us-east-2":        {"GPU": "ami-0b8095375f23cb259"},
+        "us-west-1":        {"GPU": "ami-0abc242ba705befbd"},
+        "us-west-2":        {"GPU": "ami-0ae09a1dbc02427a8"}
     }
 }
