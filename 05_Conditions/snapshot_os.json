@@ -1,3 +1,0 @@
-{
-    "SnapshotIdOSCondition": {"Fn::Not": [{"Fn::Equals" : [{"Ref" : "SnapshotIdOSParam"}, ""]}]}
-}

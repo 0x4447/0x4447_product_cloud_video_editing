@@ -1,6 +1,0 @@
-{
-    "SnapshotIdOSParam": {
-        "Description": "The Snapshot ID of the operating system.",
-        "Type": "String"
-    }
-}

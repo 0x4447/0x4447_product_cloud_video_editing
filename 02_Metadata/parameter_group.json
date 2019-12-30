@@ -3,6 +3,14 @@
             "ParameterGroups": [
                 {
                     "Label": {
+                        "default": "Amazon EC2 configuration"
+                    },
+                    "Parameters": [
+                        "KeyPairName"
+                    ]
+                },
+                {
+                    "Label": {
                         "default": "Network configuration"
                     },
                     "Parameters": [
@@ -15,16 +23,7 @@
                         "default": "Drives Restoration"
                     },
                     "Parameters": [
-                        "SnapshotIdDataParam",
-                        "SnapshotIdOSParam"
-                    ]
-                },
-                {
-                    "Label": {
-                        "default": "Amazon EC2 configuration"
-                    },
-                    "Parameters": [
-                        "KeyPairName"
+                        "SnapshotIdDataParam"
                     ]
                 }
             ],
@@ -32,7 +31,6 @@
                 "KeyPairName": {"default": "Key pair name"},
                 "VPCSubnetParam": {"default": "Default Subnet"},
                 "VPCID": {"default": "VPC ID"},
-                "SnapshotIdOSParam": {"default": "OS Snapshot ID"},
                 "SnapshotIdDataParam": {"default": "Data Snapshot ID"}
             }
         }
