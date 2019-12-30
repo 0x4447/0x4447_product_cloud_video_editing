@@ -24,10 +24,6 @@
 
                             "\n",
 
-                            "Initialize-Disk -Number 1 -PartitionStyle 'MBR'",
-
-                            "\n",
-
                             "cfn-init.exe -v -c config -s ",
                             { "Ref": "AWS::StackId" },
                             " -r EC2Instance",
