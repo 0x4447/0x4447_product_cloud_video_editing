@@ -3,7 +3,6 @@
         "Type": "AWS::EC2::Instance",
         "Properties": {
             "InstanceType": "g3.4xlarge",
-            "InstanceType": "g4dn.xlarge",
             "ImageId": { "Fn::FindInMap": [ "AWSAMIRegionMap", { "Ref": "AWS::Region" }, "GPU"] },
             "KeyName": { "Ref": "KeyPairName" },
             "IamInstanceProfile": { "Ref": "ECSInstanceProfile" },
@@ -16,6 +15,12 @@
                     }
                 }
             ],
+            "NetworkInterfaces": [ {
+                "DeviceIndex": "0",
+                "GroupSet": [{ "Ref": "EC2SecurityGroup" }],
+                "SubnetId": { "Ref": "VPCSubnetParam" },
+                "PrivateIpAddress": { "Ref": "PrivateIPParam" }
+            }],
             "UserData": {
                 "Fn::Base64": {
                     "Fn::Join": [
@@ -45,12 +50,6 @@
                     ]
                 }
             },
-            "NetworkInterfaces": [ {
-                "AssociatePublicIpAddress": "true",
-                "DeviceIndex": "0",
-                "GroupSet": [{ "Ref": "EC2SecurityGroup" }],
-                "SubnetId": { "Ref": "VPCSubnetParam" }
-            }],
             "Tags": [
                 {
                     "Key": "Name",
@@ -68,7 +67,9 @@
                     "config": [
                         "setup",
                         "package_manager",
-                        "packages"
+                        "packages",
+                        "drivers",
+                        "performance"
                     ]
                 },
                 "setup": {

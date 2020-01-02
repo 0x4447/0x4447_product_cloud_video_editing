@@ -1,6 +1,6 @@
 {
     "SnapshotIdDataParam": {
-        "Description": "The Snapshot ID for the Data drive where all the video files are.",
+        "Description": "The Snapshot ID for the Data drive where all the video files are. WARNING: can be used ony when launching for the first time.",
         "Type": "String"
     }
 }

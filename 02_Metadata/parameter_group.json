@@ -15,7 +15,8 @@
                     },
                     "Parameters": [
                         "VPCID",
-                        "VPCSubnetParam"
+                        "VPCSubnetParam",
+                        "PrivateIPParam"
                     ]
                 },
                 {
@@ -29,8 +30,9 @@
             ],
             "ParameterLabels": {
                 "KeyPairName": {"default": "Key pair name"},
-                "VPCSubnetParam": {"default": "Default Subnet"},
+                "VPCSubnetParam": {"default": "Private Subnet"},
                 "VPCID": {"default": "VPC ID"},
+                "PrivateIPParam": {"default": "Private IP"},
                 "SnapshotIdDataParam": {"default": "Data Snapshot ID"}
             }
         }

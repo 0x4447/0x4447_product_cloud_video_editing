@@ -1,0 +1,7 @@
+{
+    "PrivateIPParam": {
+        "Description": "The private IP that has to be attached to the instacne so it alwasy gets the same IP.",
+        "Type": "String",
+        "Default": "10.0.0.30"
+    }
+}
