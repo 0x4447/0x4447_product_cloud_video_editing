@@ -18,22 +18,13 @@
                         "VPCSubnetParam",
                         "PrivateIPParam"
                     ]
-                },
-                {
-                    "Label": {
-                        "default": "Drives Restoration"
-                    },
-                    "Parameters": [
-                        "SnapshotIdDataParam"
-                    ]
                 }
             ],
             "ParameterLabels": {
                 "KeyPairName": {"default": "Key pair name"},
                 "VPCSubnetParam": {"default": "Private Subnet"},
                 "VPCID": {"default": "VPC ID"},
-                "PrivateIPParam": {"default": "Private IP"},
-                "SnapshotIdDataParam": {"default": "Data Snapshot ID"}
+                "PrivateIPParam": {"default": "Private IP"}
             }
         }
 }
